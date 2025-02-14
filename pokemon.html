@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Pokémon 3D</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .scene {
+            perspective: 800px;
+        }
+
+        .card {
+            width: 250px;
+            height: 350px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .front {
+            background-image: url('./pokeeemon/Ro.png') no-repeat center/cover;
+        }
+
+        .back {
+            background-image: url('./pokeeemon/atras.png') no-repeat center/cover;
+            transform: rotateY(180deg);
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type="range"] {
+            width: 200px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="scene">
+            <div class="card" id="card">
+                <div class="card-face front"></div>
+                <div class="card-face back"></div>
+            </div>
+        </div>
+        <div class="controls">
+            <label>Rotación X: <input type="range" id="rotateX" min="-180" max="180" value="0"></label>
+            <label>Rotación Y: <input type="range" id="rotateY" min="-180" max="180" value="0"></label>
+            <label>Rotación Z: <input type="range" id="rotateZ" min="-180" max="180" value="0"></label>
+        </div>
+    </div>
+
+    <script>
+        const card = document.getElementById('card');
+        const rotateX = document.getElementById('rotateX');
+        const rotateY = document.getElementById('rotateY');
+        const rotateZ = document.getElementById('rotateZ');
+
+        function updateRotation() {
+            const x = rotateX.value;
+            const y = rotateY.value;
+            const z = rotateZ.value;
+            card.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+        }
+
+        rotateX.addEventListener('input', updateRotation);
+        rotateY.addEventListener('input', updateRotation);
+        rotateZ.addEventListener('input', updateRotation);
+    </script>
+</body>
+
+</html>
