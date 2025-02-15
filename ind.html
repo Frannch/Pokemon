@@ -1,97 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta Pokémon 3D</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #282c34;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartas Pokémon 3D</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #282c34;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      flex-direction: column;
+    }
 
-        .scene {
-            perspective: 800px;
-        }
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
 
-        .card {
-            width: 250px;
-            height: 350px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s;
-        }
+    .scene {
+      width: 250px;
+      height: 350px;
+      perspective: 800px;
+    }
 
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
 
-        .front {
-            background: url('./Ro.png') no-repeat center/cover;
-        }
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
 
-        .back {
-            background: url('./atras.png') no-repeat center/cover;
-            transform: rotateY(180deg);
-        }
-
-        .controls {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        input[type="range"] {
-            width: 200px;
-            margin: 0 10px;
-        }
-    </style>
+    .front { background: url('./Ro.png') no-repeat center/cover; }
+    .back { background: url('./atras.png') no-repeat center/cover; transform: rotateY(180deg); }
+    .front2 { background: url('./Fran.png') no-repeat center/cover; }
+    .back2 { background: url('./atras.png') no-repeat center/cover; transform: rotateY(180deg); }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="scene">
-            <div class="card" id="card">
-                <div class="card-face front"></div>
-                <div class="card-face back"></div>
-            </div>
-        </div>
-        <div class="controls">
-            <label>Rotación X: <input type="range" id="rotateX" min="-180" max="180" value="0"></label>
-            <label>Rotación Y: <input type="range" id="rotateY" min="-180" max="180" value="0"></label>
-            <label>Rotación Z: <input type="range" id="rotateZ" min="-180" max="180" value="0"></label>
-        </div>
+  <div class="cards-container">
+    <div class="scene">
+      <div class="card" id="card1">
+        <div class="card-face front"></div>
+        <div class="card-face back"></div>
+      </div>
     </div>
 
-    <script>
-        const card = document.getElementById('card');
-        const rotateX = document.getElementById('rotateX');
-        const rotateY = document.getElementById('rotateY');
-        const rotateZ = document.getElementById('rotateZ');
+    <div class="scene">
+      <div class="card" id="card2">
+        <div class="card-face front2"></div>
+        <div class="card-face back2"></div>
+      </div>
+    </div>
+  </div>
 
-        function updateRotation() {
-            const x = rotateX.value;
-            const y = rotateY.value;
-            const z = rotateZ.value;
-            card.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
-        }
+  <script>
+    const card1 = document.getElementById('card1');
+    const card2 = document.getElementById('card2');
 
-        rotateX.addEventListener('input', updateRotation);
-        rotateY.addEventListener('input', updateRotation);
-        rotateZ.addEventListener('input', updateRotation);
-    </script>
+    function rotateBoth(x, y, z) {
+      card1.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+      card2.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+    }
+  </script>
 </body>
-
 </html>
